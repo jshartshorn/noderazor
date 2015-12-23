@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+<h1>Datebase Data</h1>
+<ul>
+  <li ng-repeat="x in names">
+    {{ x.name + '- ' + x.title }}
+  </li>
+</ul>
+
+<h1>Data binding Example</h1>
+First Name: <input type="text" ng-model="firstName" placeholder="type your first name"><br>
+Last Name: <input type="text" ng-model="lastName" placeholder="type your last name"><br>
+<br>
+Full Name: {{firstName + " " + lastName}}
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("http://localhost:3131/people")
+    .success(function(response) {$scope.names = response;});
+});
+</script>
+
+</body>
+</html>
